@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Pure Data Sample Project</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_exit">Exit</string>
     <string name="action_link">About</string>
 </resources>
