@@ -1,5 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pure Data Sample Project</string>
-    <string name="action_exit">Exit</string>
     <string name="action_link">About</string>
+    <string name="action_exit">Exit</string>
+
+    <string name="heading_1">Adjust the parameters!</string>
+    <string name="label_volume">Volume</string>
+    <string name="label_frequency">Frequency</string>
+
+    <string name="button_play">Play Sound on Hold</string>
+    <string name="button_toggle_off_permanant">Permanent Sound: Off</string>
+    <string name="button_toggle_on_permanant">Permanent Sound: On</string>
 </resources>

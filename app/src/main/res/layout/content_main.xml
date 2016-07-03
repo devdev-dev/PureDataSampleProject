@@ -18,7 +18,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Adjust the volume and frequency"
+        android:text="@string/heading_1"
         android:id="@+id/textView"
         android:gravity="center_horizontal"
         android:layout_marginBottom="25dp"/>
@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Volume"
+            android:text="@string/label_volume"
             android:id="@+id/textView_mvolume"
             android:layout_weight="0.25"/>
 
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Frequency"
+            android:text="@string/label_frequency"
             android:id="@+id/textView_mfrequency"
             android:layout_weight="0.25"/>
 
@@ -66,13 +66,14 @@
     <ToggleButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New ToggleButton"
+        android:textOff="@string/button_toggle_off_permanant"
+        android:textOn="@string/button_toggle_on_permanant"
         android:id="@+id/buttonToggleSound"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="New Button"
+        android:text="@string/button_play"
         android:id="@+id/buttonPlaySound"/>
 
 

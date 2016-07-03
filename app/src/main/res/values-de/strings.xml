@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pure Data Beispielprojekt</string>
+    <string name="action_link">Info</string>
+    <string name="action_exit">Beenden</string>
+
+    <string name="heading_1">Passe die Parameter an!</string>
+    <string name="label_volume">Lautstärke</string>
+    <string name="label_frequency">Frequenz</string>
+
+    <string name="button_play">Halten zum Klang erzeugen</string>
+    <string name="button_toggle_off_permanant">Permanente Klangausgabe: Aus</string>
+    <string name="button_toggle_on_permanant">Permanente Klangausgabe: An</string>
+</resources>
