@@ -32,36 +32,28 @@ public class MainActivity extends AppCompatActivity {
 
 	private static final String TAG = "PDSampleProject";
 
-	private PdService pdService = null;
-
-	private Toast toast = null;
-
 	Button btnPlaySound;
 	ToggleButton btnToggleSound;
 	SeekBar seekbarFrequency;
 	SeekBar seekbarVolume;
 
-	int volume = 0; //0 to 100
+	/**
+	 * The PdService is provided by the pd-for-android library.
+	 */
+	private PdService pdService = null;
 
-	private void toast(final String text) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				if (toast == null) {
-					toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
-				}
-				toast.setText(TAG + ": " + text);
-				toast.show();
-			}
-		});
-	}
+	/**
+	 * The volume value as integer from 0 to 100 percent
+	 */
+	int volume = 0;
 
+	/**
+	 * Initialises the pure data service for playing audio and receiving control commands.
+	 */
 	private final ServiceConnection pdConnection = new ServiceConnection() {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			String appName = getResources().getString( R.string.app_name);
 			pdService = ((PdService.PdBinder)service).getService();
-
 			initPd();
 
 			try {
@@ -79,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
 		}
 	};
 
+	/**
+	 * Initialises the pure data audio interface and loads the patch file packaged within the app.
+	 */
+	@SuppressWarnings("ResultOfMethodCallIgnored")
 	private void initPd() {
 		File patchFile = null;
 		try {
@@ -106,13 +102,17 @@ public class MainActivity extends AppCompatActivity {
 		AudioParameters.init(this);
 		bindService(new Intent(this, PdService.class), pdConnection, BIND_AUTO_CREATE);
 
-		init_gui();
+		initGui();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		cleanup();
+		try {
+			unbindService(pdConnection);
+		} catch (IllegalArgumentException e) {
+			pdService = null;
+		}
 	}
 
 	@Override
@@ -140,10 +140,10 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * Initialize the GUI elements and necessary handlers.
+	 * Initialises the user interface elements and necessary handlers responsibly for the interaction with the
+	 * pre-loaded pure data patch. The code is really pure data patch specific.
 	 */
-	private void init_gui() {
-
+	private void initGui() {
 		// touch to play button
 		this.btnPlaySound = (Button) findViewById( R.id.buttonPlaySound );
 		this.btnPlaySound.setOnTouchListener( new View.OnTouchListener() {
@@ -231,11 +231,18 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	private void cleanup() {
-		try {
-			unbindService(pdConnection);
-		} catch (IllegalArgumentException e) {
-			pdService = null;
-		}
+	/**
+	 * Trigger a native Android toast message.
+	 * @param text
+	 */
+	private void toast(final String text) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
+				toast.setText(TAG + ": " + text);
+				toast.show();
+			}
+		});
 	}
 }
